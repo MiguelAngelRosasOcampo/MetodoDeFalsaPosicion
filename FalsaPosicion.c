@@ -18,7 +18,7 @@ int main(void)
 		printf("\n\nIngresa el grado del polinomio: ");
 		scanf("%hd",&grado);
 		
-	}while(grado < 1 || grado > 12); //El grado debe de ser mayor a 0 y menor o igual a 12.
+	}while(grado < 1 || grado > 12); //El grado debe de ser mayor a 0 y menor a 12.
 	
 	printf("\nEstructura de la expresi%cn algebraica\n\n        ",162);
 	for(i=0; i<grado-1; i++) //Muestra el grado de la variable X.
@@ -28,7 +28,7 @@ int main(void)
 	for(i=0; i<grado; i++) //Ciclo para mostrar el coeficiente y la variable X.
 		printf("%cx + ",coeficienteAscii++);
 		
-	printf("%c\n",coeficienteAscii++);	//Muestra el término independiente.
+	printf("%c\n",coeficienteAscii++);	//Muestra el tÃ©rmino independiente.
 	
 	coeficientes = (double*) malloc(grado * sizeof(double)); //Reservar espacio en la memoria.
 
@@ -53,14 +53,14 @@ int main(void)
 	scanf("%lf",&terminoIndep);
 	
 	for(j=0,i=0; i<grado; i++) //Bucle guardar las posiciones donde el coeficiente no sea 0.
-		if(*(coeficientes + i)) //Verifica que el coeficiente en esa posición no sea 0.
+		if(*(coeficientes + i)) //Verifica que el coeficiente en esa posiciÃ³n no sea 0.
 		{
-			*(exponentes + (j)) = grado - i; //Se guarda el grado en la posición j.
-			*(coeficientes + (j++)) = *(coeficientes + i); //Se guarda el coeficiente en la posición j.
-			nuevoTam++; //Variable para el nuevo tamaño del arreglo.
+			*(exponentes + (j)) = grado - i; //Se guarda el grado en la posiciÃ³n j.
+			*(coeficientes + (j++)) = *(coeficientes + i); //Se guarda el coeficiente en la posiciÃ³n j.
+			nuevoTam++; //Variable para el nuevo tamaÃ±o del arreglo.
 		}
 			
-	coeficientes = (double*) realloc(coeficientes, (sizeof(double)*nuevoTam));//Nuevo tamaño
+	coeficientes = (double*) realloc(coeficientes, (sizeof(double)*nuevoTam));//Nuevo tamaÃ±o
 	
 	if(!coeficientes)	
 	{
@@ -68,9 +68,9 @@ int main(void)
 		exit(-1);
 	}
 			
-	mFalsaPosicion(exponentes, coeficientes, terminoIndep, nuevoTam); //Función que calcula la raíz.
+	mFalsaPosicion(exponentes, coeficientes, terminoIndep, nuevoTam); //FunciÃ³n que calcula la raÃ­z.
 	
-	free(coeficientes); //Liberar la memoria dinámica.
+	free(coeficientes); //Liberar la memoria dinÃ¡mica.
 	free(exponentes);
 	
 	return 0;
@@ -85,14 +85,14 @@ void mFalsaPosicion(int *exponentes, double *coeficientes , double terminoIndep,
 	printf("\n\nIngresa el l%cmite inferior (Xl): ",161);
 	scanf("%lf",&xl);
 	
-	do //Bucle para que usuario ingrese un valor mayor al límite inferior.
+	do //Bucle para que usuario ingrese un valor mayor al lÃ­mite inferior.
 	{
 		setbuf(stdin, NULL); //Limpiar el buffer.
 		
 		printf("\nIngresa el l%cmite superior (Xu): ",161);
 		scanf("%lf",&xu);
 		
-		if(xu <= xl)//Condicional para verificar si el límite inferior es mayor que el límite superior.
+		if(xu <= xl)//Condicional para verificar si el lÃ­mite inferior es mayor que el lÃ­mite superior.
 			printf("",getchar(),getchar(), printf("Debes de ingresar un valor mayor a %lf.",xl));
 
 	}while(xu <= xl);
@@ -105,7 +105,7 @@ void mFalsaPosicion(int *exponentes, double *coeficientes , double terminoIndep,
 	}while(nIteraciones < 1);	
 			
 	printf("\nTu expresi%cn algebraica es: \n\n\t\t\t%c(x) = ",162, 159);
-	for(j=0; j<nuevoTam; j++)//Ciclo para mostrar la expresión que usuario ingresó.
+	for(j=0; j<nuevoTam; j++)//Ciclo para mostrar la expresiÃ³n que usuario ingresÃ³.
 		if(*(exponentes + j))
 			*(coeficientes+j)!=1 ? printf("%+gx^%d ",*(coeficientes+j), *(exponentes + j)) : printf("x^%d ",*(exponentes + j));
 			
@@ -128,42 +128,42 @@ void mFalsaPosicion(int *exponentes, double *coeficientes , double terminoIndep,
 
 		printf("\n\n\t%d \t\t%lf \t%lf \t%lf",i, xl, xu, xr);//Muestra los datos.
 				
-		for(j=0; j<nuevoTam; j++) //Evalúa la función con el límite Xl.
+		for(j=0; j<nuevoTam; j++) //EvalÃºa la funciÃ³n con el lÃ­mite Xl.
 			fxl += *(coeficientes+j) * pow(xl,*(exponentes+j));
 			
-		fxl += terminoIndep; //Le suma el término independiente.
+		fxl += terminoIndep; //Le suma el tÃ©rmino independiente.
 	
-		for(j=0; j<nuevoTam; j++) //Evalúa la función con el límite Xu.
+		for(j=0; j<nuevoTam; j++) //EvalÃºa la funciÃ³n con el lÃ­mite Xu.
 			fxu += *(coeficientes+j) * pow(xu,*(exponentes+j));
 						
-		fxu += terminoIndep; //Le suma el término independiente.
+		fxu += terminoIndep; //Le suma el tÃ©rmino independiente.
 		
-		producto = fxu * fxl; //Hace el producto para verificar que exista al menos una raíz.
+		producto = fxu * fxl; //Hace el producto para verificar que exista al menos una raÃ­z.
 		
 		if(producto > 0) //Si el producto es positivo, entonces no hay raices.
 			break;
 			
 		if(fxl - fxu) //verifica que la diferencia entre fxl y fxu no sea 0.
-			xr = xu - ( ((fxu)*(xl - xu)) / (fxl - fxu) ); //Fórmula del método de falsa posición.
+			xr = xu - ( ((fxu)*(xl - xu)) / (fxl - fxu) ); //FÃ³rmula del mÃ©todo de falsa posiciÃ³n.
 		
 		else break;
 		
-		for(j=0; j<nuevoTam; j++) //Evalúa la función con el valor de Xl.
+		for(j=0; j<nuevoTam; j++) //EvalÃºa la funciÃ³n con el valor de Xl.
 			fxr += *(coeficientes+j) * pow(xr,*(exponentes+j));
 			
-		fxr += terminoIndep; //Le suma el término independiente.		
+		fxr += terminoIndep; //Le suma el tÃ©rmino independiente.		
 		
 		producto = fxr * fxu; //realiza el producto de las evaluaciones.
 		
-		producto < 0 ? (xl = xr) : (xu = xr); //Asigna el nuevo límite.	
+		producto < 0 ? (xl = xr) : (xu = xr); //Asigna el nuevo lÃ­mite.	
 	
-		xAnterior = xNuevo; //Asignará el valor anterior de xNuevo después de la segunda iteración.
+		xAnterior = xNuevo; //AsignarÃ¡ el valor anterior de xNuevo despuÃ©s de la segunda iteraciÃ³n.
 		xNuevo = xr; //Asignar el nuevo valor de xR a xNuevo.
 		
-		if(i && xNuevo) //A partir de la segunda iteración, se obtendrá el error apróximado.
+		if(i && xNuevo) //A partir de la segunda iteraciÃ³n, se obtendrÃ¡ el error aprÃ³ximado.
 			errorAprox = ((xNuevo-xAnterior) / xNuevo) * 100;
 			
-		if(i++) //Muestra el error apróximado a partir de la segunda iteración.
+		if(i++) //Muestra el error aprÃ³ximado a partir de la segunda iteraciÃ³n.
 			printf("\t%lf",errorAprox < 0 ? errorAprox*-1 : errorAprox);
 	}
 	
